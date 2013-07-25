@@ -17,6 +17,9 @@
  * along with GOFG Sports Computer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+function powerMgmtError(error){ report('ERROR','powerMgmtError() [error(' + error + ')]'); }
+function powerMgmtSuccess(success){	report('TEST','powerMgmtSuccess() success: ' + powerMgmtSuccess + '...');}
+
 cordova.define("cordova/plugin/powermanagement", function(require, exports, module) {   // (function(cordova) {
 	
 	var exec = require('cordova/exec');
@@ -56,45 +59,38 @@ cordova.define("cordova/plugin/powermanagement", function(require, exports, modu
 	var powermanagement = new PowerManagement();
 	module.exports = powermanagement;
 
-
-	function powerMgmtError(error){ report('ERROR','powerMgmtError() [error(' + error + ')]'); }
-	function powerMgmtSuccess(success){	report('TEST','powerMgmtSuccess() success: ' + powerMgmtSuccess + '...');}
-
-	/* ----------------------------------------------------------- /
-	    PWpreventAutoLock
-	/ ----------------------------------------------------------- */
-	function PWpreventAutoLock(){
-	    if(cordovaIsLoaded) report('TEST','--> PWpreventAutoLock()..'); 
-	    try{
-	        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').acquire( powerMgmtSuccess, powerMgmtError );                                                
-	    }catch(e){ catchError('PWpreventAutoLock()',e); }           
-	}       
-
-	/* ----------------------------------------------------------- /
-	    PWpreventAutoLockButAllowDim
-	/ ----------------------------------------------------------- */
-	function PWpreventAutoLockButAllowDim(){
-	    if(cordovaIsLoaded) report('TEST','--> PWpreventAutoLockButAllowDim()..');  
-	    try{
-	        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').dim( powerMgmtSuccess, powerMgmtError ); 
-	    }catch(e){ catchError('PWpreventAutoLockButAllowDim()',e); }            
-	}       
-
-	/* ----------------------------------------------------------- /
-	    PWreenableAutoLock
-	/ ----------------------------------------------------------- */
-	function PWreenableAutoLock(){
-	    if(cordovaIsLoaded) report('TEST','--> PWreenableAutoLock()..');    
-	    try{
-	        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').release( powerMgmtSuccess, powerMgmtError ); 
-	    }catch(e){ catchError('PWreenableAutoLock()',e); }          
-	}       
-
-
-
 });
 
 
+/* ----------------------------------------------------------- /
+    PWpreventAutoLock
+/ ----------------------------------------------------------- */
+function PWpreventAutoLock(){
+    if(cordovaIsLoaded) report('TEST','--> PWpreventAutoLock()..'); 
+    try{
+        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').acquire( powerMgmtSuccess, powerMgmtError );                                                
+    }catch(e){ catchError('PWpreventAutoLock()',e); }           
+}       
+
+/* ----------------------------------------------------------- /
+    PWpreventAutoLockButAllowDim
+/ ----------------------------------------------------------- */
+function PWpreventAutoLockButAllowDim(){
+    if(cordovaIsLoaded) report('TEST','--> PWpreventAutoLockButAllowDim()..');  
+    try{
+        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').dim( powerMgmtSuccess, powerMgmtError ); 
+    }catch(e){ catchError('PWpreventAutoLockButAllowDim()',e); }            
+}       
+
+/* ----------------------------------------------------------- /
+    PWreenableAutoLock
+/ ----------------------------------------------------------- */
+function PWreenableAutoLock(){
+    if(cordovaIsLoaded) report('TEST','--> PWreenableAutoLock()..');    
+    try{
+        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').release( powerMgmtSuccess, powerMgmtError ); 
+    }catch(e){ catchError('PWreenableAutoLock()',e); }          
+}      
 
 
-/* DEBUG */ window.console.log('PowerManagement.js loaded...');
+/* DEBUG */ window.console.log('PowerManagement.js loaded...[' + isMobile.any() + '] [' + typeof(PWreenableAutoLock) + ']');
