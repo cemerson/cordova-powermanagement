@@ -17,8 +17,7 @@
  * along with GOFG Sports Computer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-cordova.define("cordova/plugin/powermanagement", function(require, exports, module) {   // (function(cordova) {
-	
+cordova.define("cordova/plugin/powermanagement", function(require, exports, module) {
 	var exec = require('cordova/exec');
 	
 	var PowerManagement = function() {};
@@ -26,36 +25,33 @@ cordova.define("cordova/plugin/powermanagement", function(require, exports, modu
 	/**
 	 * Acquire a new wake-lock (keep device awake)
 	 * 
-	 * @param successCallback function to be called when the wake-lock was acquired successfully
+	 * @param powerMgmtSuccess function to be called when the wake-lock was acquired successfully
 	 * @param errorCallback function to be called when there was a problem with acquiring the wake-lock
 	 */
-	PowerManagement.prototype.acquire = function(successCallback,failureCallback) {
+	PowerManagement.prototype.acquire = function(powerMgmtSuccess,powerMgmtError) {
 	    exec(powerMgmtSuccess, powerMgmtError, 'PowerManagement', 'acquire', []);
 	}
 
 	/**
 	 * Release the wake-lock
 	 * 
-	 * @param successCallback function to be called when the wake-lock was released successfully
+	 * @param powerMgmtSuccess function to be called when the wake-lock was released successfully
 	 * @param errorCallback function to be called when there was a problem while releasing the wake-lock
 	 */
-	PowerManagement.prototype.release = function(successCallback,failureCallback) {
+	PowerManagement.prototype.release = function(powerMgmtSuccess,powerMgmtError) {
 	    exec(powerMgmtSuccess, powerMgmtError, 'PowerManagement', 'release', []);
 	}
 
 	/**
 	 * Acquire a partial wake-lock, allowing the device to dim the screen
 	 *
-	 * @param successCallback function to be called when the wake-lock was acquired successfully
+	 * @param powerMgmtSuccess function to be called when the wake-lock was acquired successfully
 	 * @param errorCallback function to be called when there was a problem with acquiring the wake-lock
 	 */
-	PowerManagement.prototype.dim = function(successCallback,failureCallback) {
+	PowerManagement.prototype.dim = function(powerMgmtSuccess,powerMgmtError) {
 	    exec(powerMgmtSuccess, powerMgmtError, 'PowerManagement', 'acquire', [true]);
 	}
 	
 	var powermanagement = new PowerManagement();
 	module.exports = powermanagement;
-
 });
-
-/* DEBUG */ window.console.log('PowerManagement.js loaded...[' + isMobile.any() + '] [' + typeof(PWreenableAutoLock) + ']');
