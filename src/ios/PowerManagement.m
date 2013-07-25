@@ -26,11 +26,11 @@
  * Actual implementation of the interface
  */
 @implementation PowerManagement
-- (void) acquire:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
-{
+- (void) acquire:(CDVInvokedUrlCommand*)command{  // - (void) acquire:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options{ 
+
     CDVPluginResult* result = nil;
     NSString* jsString = nil;
-    NSString* callbackId = [arguments objectAtIndex:0];
+    NSString* callbackId = [command.arguments objectAtIndex:0];
     
     // Acquire a reference to the local UIApplication singleton
     UIApplication* app = [UIApplication sharedApplication];
@@ -49,12 +49,10 @@
     [self writeJavascript:jsString];
 }
 
-
-- (void) release:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options
-{    
+- (void) release:(CDVInvokedUrlCommand*)command{ // - (void) release:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options{    
     CDVPluginResult* result = nil;
     NSString* jsString = nil;
-    NSString* callbackId = [arguments objectAtIndex:0];
+    NSString* callbackId = [command.arguments objectAtIndex:0];
     
     // Acquire a reference to the local UIApplication singleton
     UIApplication* app = [UIApplication sharedApplication];
