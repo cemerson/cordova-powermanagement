@@ -50,7 +50,6 @@ function PWreenableAutoLock(){
     }catch(e){ catchError('PWreenableAutoLock()',e); }          
 }       
 
-
 cordova.define("cordova/plugin/powermanagement", function(require, exports, module) {   // (function(cordova) {
 	
 	var exec = require('cordova/exec');
@@ -86,12 +85,11 @@ cordova.define("cordova/plugin/powermanagement", function(require, exports, modu
 	PowerManagement.prototype.dim = function(successCallback,failureCallback) {
 	    exec(powerMgmtSuccess, powerMgmtError, 'PowerManagement', 'acquire', [true]);
 	}
-		
+	
 	var powermanagement = new PowerManagement();
 	module.exports = powermanagement;
-	
-})(window.cordova || window.Cordova);
 
+});
 
 
 /* DEBUG */ window.console.log('PowerManagement.js loaded...');
