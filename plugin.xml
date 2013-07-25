@@ -6,7 +6,7 @@
 
     <name>PowerManagement</name>
 
-    <js-module src="www/powermanagement.js" name="PowerManagement">
+    <js-module src="www/PowerManagement.js" name="PowerManagement">
         <clobbers target="PowerManagement" />
     </js-module>
         
