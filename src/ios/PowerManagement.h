@@ -39,7 +39,8 @@
 
 /**
  * Sets the idleTimerDisable property to false so that the idle timeout is enabled
+ *
  */
 - (void) release:(NSMutableArray*)arguments withDict:(NSMutableDictionary*)options;
 
-@end
+@end 
