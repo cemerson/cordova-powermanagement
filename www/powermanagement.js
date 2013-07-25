@@ -17,7 +17,8 @@
  * along with GOFG Sports Computer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-cordova.define("cordova/plugin/powermanagement", function(require, exports, module) {
+(function(cordova) {
+// cordova.define("cordova/plugin/powermanagement", function(require, exports, module) {
 	var exec = require('cordova/exec');
 	
 	var PowerManagement = function() {};
@@ -52,6 +53,13 @@ cordova.define("cordova/plugin/powermanagement", function(require, exports, modu
 	    exec(powerMgmtSuccess, powerMgmtError, 'PowerManagement', 'acquire', [true]);
 	}
 	
-	var powermanagement = new PowerManagement();
-	module.exports = powermanagement;
-});
+	cordova.addConstructor(function() {
+		if(!window.plugins) window.plugins = {};
+		window.plugins.powermanagement = new PowerManagement();
+	});
+
+//});
+})(window.cordova || window.Cordova);
+
+
+/* DEBUG */ window.console.log('PowerManagement.js loaded...');
