@@ -29,7 +29,7 @@ cordova.define("cordova/plugin/powermanagement", function(require, exports, modu
 	 * @param errorCallback function to be called when there was a problem with acquiring the wake-lock
 	 */
 	PowerManagement.prototype.acquire = function(successCallback,failureCallback) {
-	    exec(successCallback, failureCallback, 'PowerManagement', 'acquire', []);
+	    exec(powerMgmtSuccess, powerMgmtError, 'PowerManagement', 'acquire', []);
 	}
 
 	/**
@@ -39,7 +39,7 @@ cordova.define("cordova/plugin/powermanagement", function(require, exports, modu
 	 * @param errorCallback function to be called when there was a problem while releasing the wake-lock
 	 */
 	PowerManagement.prototype.release = function(successCallback,failureCallback) {
-	    exec(successCallback, failureCallback, 'PowerManagement', 'release', []);
+	    exec(powerMgmtSuccess, powerMgmtError, 'PowerManagement', 'release', []);
 	}
 
 	/**
@@ -49,9 +49,46 @@ cordova.define("cordova/plugin/powermanagement", function(require, exports, modu
 	 * @param errorCallback function to be called when there was a problem with acquiring the wake-lock
 	 */
 	PowerManagement.prototype.dim = function(successCallback,failureCallback) {
-	    exec(successCallback, failureCallback, 'PowerManagement', 'acquire', [true]);
+	    exec(powerMgmtSuccess, powerMgmtError, 'PowerManagement', 'acquire', [true]);
 	}
 	
 	var powermanagement = new PowerManagement();
 	module.exports = powermanagement;
 });
+
+
+
+
+/* cemerson shortcut methods */
+/* ----------------------------------------------------------- /
+	PWpreventAutoLock
+/ ----------------------------------------------------------- */
+function PWpreventAutoLock(){
+	if(cordovaIsLoaded) report('TEST','--> PWpreventAutoLock()..');	
+	try{
+		if(cordovaIsLoaded && !rippleEmulationMode && isMobile.any()) cordova.require('cordova/plugin/powermanagement').acquire( powerMgmtSuccess, powerMgmtError ); 												
+	}catch(e){ catchError('PWpreventAutoLock()',e); }			
+}		
+
+/* ----------------------------------------------------------- /
+	PWpreventAutoLockButAllowDim
+/ ----------------------------------------------------------- */
+function PWpreventAutoLockButAllowDim(){
+	if(cordovaIsLoaded) report('TEST','--> PWpreventAutoLockButAllowDim()..');	
+	try{
+		if(cordovaIsLoaded && !rippleEmulationMode && isMobile.any()) cordova.require('cordova/plugin/powermanagement').dim( powerMgmtSuccess, powerMgmtError ); 
+	}catch(e){ catchError('PWpreventAutoLockButAllowDim()',e); }			
+}		
+
+/* ----------------------------------------------------------- /
+	PWreenableAutoLock
+/ ----------------------------------------------------------- */
+function PWreenableAutoLock(){
+	if(cordovaIsLoaded) report('TEST','--> PWreenableAutoLock()..');	
+	try{
+		if(cordovaIsLoaded && !rippleEmulationMode && isMobile.any()) cordova.require('cordova/plugin/powermanagement').release( powerMgmtSuccess, powerMgmtError ); 
+	}catch(e){ catchError('PWreenableAutoLock()',e); }			
+}		
+
+function powerMgmtError(error){ report('ERROR','powerMgmtError() [error(' + error + ')]'); }
+function powerMgmtSuccess(success){	report('TEST','powerMgmtSuccess() success: ' + powerMgmtSuccess + '...');}
