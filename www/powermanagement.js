@@ -20,9 +20,39 @@
 function powerMgmtError(error){ report('ERROR','powerMgmtError() [error(' + error + ')]'); }
 function powerMgmtSuccess(success){	report('TEST','powerMgmtSuccess() success: ' + powerMgmtSuccess + '...');}
 
+/* ----------------------------------------------------------- /
+    PWpreventAutoLock
+/ ----------------------------------------------------------- */
+function PWpreventAutoLock(){
+    if(cordovaIsLoaded) report('TEST','--> PWpreventAutoLock()..'); 
+    try{
+        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').acquire( powerMgmtSuccess, powerMgmtError );                                                
+    }catch(e){ catchError('PWpreventAutoLock()',e); }           
+}       
 
-(function(cordova) {
+/* ----------------------------------------------------------- /
+    PWpreventAutoLockButAllowDim
+/ ----------------------------------------------------------- */
+function PWpreventAutoLockButAllowDim(){
+    if(cordovaIsLoaded) report('TEST','--> PWpreventAutoLockButAllowDim()..');  
+    try{
+        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').dim( powerMgmtSuccess, powerMgmtError ); 
+    }catch(e){ catchError('PWpreventAutoLockButAllowDim()',e); }            
+}       
 
+/* ----------------------------------------------------------- /
+    PWreenableAutoLock
+/ ----------------------------------------------------------- */
+function PWreenableAutoLock(){
+    if(cordovaIsLoaded) report('TEST','--> PWreenableAutoLock()..');    
+    try{
+        if(cordovaIsLoaded && isMobile.any()) cordova.require('cordova/plugin/powermanagement').release( powerMgmtSuccess, powerMgmtError ); 
+    }catch(e){ catchError('PWreenableAutoLock()',e); }          
+}       
+
+
+cordova.define("cordova/plugin/powermanagement", function(require, exports, module) {  //(function(cordova) {
+	
 	var exec = require('cordova/exec');
 	
 	var PowerManagement = function() {};
@@ -60,12 +90,8 @@ function powerMgmtSuccess(success){	report('TEST','powerMgmtSuccess() success: '
 	var powermanagement = new PowerManagement();
 	module.exports = powermanagement;
 
-	// cordova.addConstructor(function() {
-	// 	if(!window.plugins) window.plugins = {};
-	// 	window.plugins.powermanagement = new PowerManagement();
-	// });	
-
 })(window.cordova || window.Cordova);
 
-/* DEBUG */ window.console.log('PowerManagement.js loaded...');
 
+
+/* DEBUG */ window.console.log('PowerManagement.js loaded...');
