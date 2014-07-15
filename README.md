@@ -1,13 +1,24 @@
-cordova-powermanagement
-=======================
+PowerManagement
+===============
+Plugin for Cordova (3.0+) IOS and Android
 
-###Install to project:
-cordova plugin add https://github.com/cemerson/cordova-powermanagement.git
+The PowerManagement plugin offers access to the devices power-management functionality.
+It should be used for applications which keep running for a long time without any user interaction.
 
-###Remove from project:
+#Adding the Plugin to your project
+
+cordova plugin add https://github.com/raulduran/PowerManagement.git
+
+#Removing the Plugin to your project
+
 cordova plugin rm org.apache.cordova.plugins.PowerManagement
 
-###Changes
-- Removed All platforms except IOS for now :(
-- Updated plugin files to work in CDV 3 CLI
-- Updated PowerManagement.m to eliminate Background Thread warning in Xcode (reference: http://goo.gl/JokRZw)
+#Using the plugin
+
+Acquire
+
+cordova.plugins.powerManagement.acquire(onSuccess, onError);
+
+Release
+
+cordova.plugins.powerManagement.release(onSuccess, onError);
