@@ -7,7 +7,7 @@ It should be used for applications which keep running for a long time without an
 
 #Adding the Plugin to your project
 
-cordova plugin add https://github.com/raulduran/PowerManagement.git
+cordova plugin add https://github.com/ujjalsuttradhar/cordova-powermanagement.git
 
 #Removing the Plugin to your project
 
@@ -22,3 +22,6 @@ cordova.plugins.powerManagement.acquire(onSuccess, onError);
 Release
 
 cordova.plugins.powerManagement.release(onSuccess, onError);
+
+#Changes
+Removed all depricated methods and replaced those with proper methods. 
